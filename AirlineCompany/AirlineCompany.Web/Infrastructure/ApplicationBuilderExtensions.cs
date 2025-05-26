@@ -1,5 +1,7 @@
 ﻿using AirlineCompany.Data;
 using AirlineCompany.Models;
+using AirlineCompany.Services;
+using AirlineCompany.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using static AirlineCompany.Web.Common.CommonConstants;
@@ -10,7 +12,8 @@ namespace AirlineCompany.Web.Infrastructure
     {
         public static void RegisterServicesCollection(this WebApplicationBuilder builder)
         {
-            
+            builder.Services
+                .AddTransient<IUserService, UserService>();
         }
 
         public static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)

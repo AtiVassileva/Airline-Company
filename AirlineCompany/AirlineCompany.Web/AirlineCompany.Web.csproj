@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AirlineCompany.Data\AirlineCompany.Data.csproj" />
+    <ProjectReference Include="..\AirlineCompany.Services\AirlineCompany.Services.csproj" />
   </ItemGroup>
 
 </Project>

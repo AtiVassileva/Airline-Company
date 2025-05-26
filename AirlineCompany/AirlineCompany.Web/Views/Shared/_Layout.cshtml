@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
 
     <link rel="stylesheet" href="~/css/bootstrap/bootstrap.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-..." crossorigin="anonymous" />
     <link rel="stylesheet" href="~/css/animate.css">
     <link rel="stylesheet" href="~/fonts/ionicons/css/ionicons.min.css">
 
@@ -39,10 +40,22 @@
                         <li class="nav-item"><a class="nav-link" href="services.html">Моите резервации</a></li>
                         @if (User.IsAdmin())
                         {
-                            <li class="nav-item"><a class="nav-link" href="travel.html">Администратор</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Администратор
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="AdminUsers" asp-action="Index">
+                                            Потребители
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         }
-                        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <button  type="submit" class="nav-link btn btn-link text-danger">Изход</button>
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-link text-danger">Изход</button>
                         </form>
                     }
                     else
@@ -59,8 +72,70 @@
         </div>
     </nav>
 
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Потвърждение за изтриване</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+                </div>
+                <div class="modal-body">
+                    Наистина ли искате да изтриете <strong id="deleteItemName">този елемент</strong>?
+                </div>
+                <div class="modal-footer">
+                    <form id="deleteForm" method="post">
+                        <button type="button" class="btn btn-secondary" style="color: #fff;" data-bs-dismiss="modal">Отказ</button>
+                        <button type="submit" class="btn btn-danger" style="color: #fff;">Изтрий</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="roleModal" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roleModalLabel">Потвърждение за смяна на роля</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+                </div>
+                <div class="modal-body">
+                    Наистина ли искате да направите <strong id="roleItemName">този елемент</strong> администратор?
+                    <strong>След потвърждение, това действие не може да бъде отменено!</strong>
+                </div>
+                <div class="modal-footer">
+                    <form id="roleForm" method="post">
+                        <button type="button" class="btn btn-secondary" style="color: #fff;" data-bs-dismiss="modal">Отказ</button>
+                        <button type="submit" class="btn btn-warning" style="color: #fff;">Потвърди</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="roleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelModalLabel">Потвърждение за канселиране на резервация</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+                </div>
+                <div class="modal-body">
+                    Наистина ли искате да канселирате вашата резервация за <strong id="cancelItemName">този елемент</strong>?
+                    <strong>След потвърждение, това действие не може да бъде отменено!</strong>
+                </div>
+                <div class="modal-footer">
+                    <form id="cancelForm" method="post">
+                        <button type="button" class="btn btn-secondary" style="color: #fff;" data-bs-dismiss="modal">Отказ</button>
+                        <button type="submit" class="btn btn-danger" style="color: #fff;">Потвърди</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div style="padding: 10px 100px;">
-        <main role="main" class="pb-3 mt-3">
+        <main role="main" class="pb-3" style="margin-top: 8rem;">
             @RenderBody()
         </main>
     </div>
@@ -70,10 +145,17 @@
             &copy; AirFly - @DateTime.Now.Year
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2/dist/umd/popper.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+
     <script src="~/js/jquery.min.js"></script>
 
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous">
+    </script>
+
     <script src="~/js/owl.carousel.min.js"></script>
 
     <script src="~/js/bootstrap-datepicker.js"></script>
@@ -83,6 +165,8 @@
     <script src="~/js/select2.min.js"></script>
 
     <script src="~/js/main.js"></script>
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

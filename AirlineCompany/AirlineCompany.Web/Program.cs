@@ -29,7 +29,7 @@ builder.Services.AddControllersWithViews(options =>
 });
 
 //builder.Services.AddAutoMapper(typeof(MappingProfile));
-//builder.RegisterServicesCollection();
+builder.RegisterServicesCollection();
 
 var app = builder.Build();
 
