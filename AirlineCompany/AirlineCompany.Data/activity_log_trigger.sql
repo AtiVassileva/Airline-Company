@@ -59,7 +59,7 @@ BEGIN
 
     IF @act IS NOT NULL
     BEGIN
-        INSERT INTO [21180047].[ActivityLogs] (Id, Action, Timestamp, TableName)
+        INSERT INTO [21180083].[ActivityLogs] (Id, Action, Timestamp, TableName)
         VALUES (NEWID(), @act, SYSDATETIME(), ''' + @schemaName + '.' + @tableName + ''');
     END
 END;
