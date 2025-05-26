@@ -25,7 +25,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar mb-2" id="probootstrap-navbar" style="background: #31465b;">
         <div class="container">
             <a class="navbar-brand" asp-controller="Home" asp-action="Index">AirFly</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,6 @@
             </button>
             <div class="collapse navbar-collapse" id="probootstrap-menu">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a class="nav-link" href="index.html">Начало</a></li>
                     @if (User.Identity!.IsAuthenticated)
                     {
                         <li class="nav-item"><a class="nav-link" href="city-guides.html">Резервирай полет</a></li>
@@ -60,8 +59,8 @@
         </div>
     </nav>
 
-    <div class="home-container" style="padding: 10px 100px;">
-        <main role="main" class="pb-3">
+    <div style="padding: 10px 100px;">
+        <main role="main" class="pb-3 mt-3">
             @RenderBody()
         </main>
     </div>
