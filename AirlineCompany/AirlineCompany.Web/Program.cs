@@ -1,5 +1,6 @@
 using AirlineCompany.Data;
 using AirlineCompany.Web.Infrastructure;
+using AirlineCompany.Web.MappingConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,7 @@ builder.Services.AddControllersWithViews(options =>
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
 
-//builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.RegisterServicesCollection();
 
 var app = builder.Build();

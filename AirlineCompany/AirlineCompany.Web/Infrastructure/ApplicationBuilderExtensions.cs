@@ -13,7 +13,8 @@ namespace AirlineCompany.Web.Infrastructure
         public static void RegisterServicesCollection(this WebApplicationBuilder builder)
         {
             builder.Services
-                .AddTransient<IUserService, UserService>();
+                .AddTransient<IUserService, UserService>()
+                .AddTransient<IDestinationService, DestinationService>();
         }
 
         public static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)

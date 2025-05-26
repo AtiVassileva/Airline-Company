@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AirlineCompany.Data\AirlineCompany.Data.csproj" />
+    <ProjectReference Include="..\AirlineCompany.Models\AirlineCompany.Models.csproj" />
+  </ItemGroup>
+
 </Project>

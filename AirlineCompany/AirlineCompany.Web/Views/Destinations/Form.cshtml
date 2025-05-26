@@ -1,0 +1,27 @@
+﻿@model DestinationFormModel
+
+<h2>@(Model.Id == null ? "Създай дестинация" : "Редактирай дестинация")</h2>
+
+<form asp-action="Update">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <input asp-for="Id" type="hidden" />
+    <input type="hidden" asp-for="VersionNo" />
+
+    <div class="form-group">
+        <label asp-for="CityName"></label>
+        <input asp-for="CityName" class="form-control" />
+        <span asp-validation-for="CityName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CountryName"></label>
+        <input asp-for="CountryName" class="form-control" />
+        <span asp-validation-for="CountryName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AirportName"></label>
+        <input asp-for="AirportName" class="form-control" />
+        <span asp-validation-for="AirportName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Запази</button>
+</form>
