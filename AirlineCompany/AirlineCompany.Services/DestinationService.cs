@@ -15,7 +15,11 @@ namespace AirlineCompany.Services
         }
 
         public async Task<IEnumerable<Destination>> GetAllAsync()
-            => await _context.Destinations.ToListAsync();
+            => await _context.Destinations
+                .OrderBy(d => d.CountryName)
+                .ThenBy(d => d.CityName)
+                .ThenBy(d => d.AirportName)
+                .ToListAsync();
 
         public async Task<Destination?> GetByIdAsync(Guid id)
             => await _context.Destinations.FindAsync(id);

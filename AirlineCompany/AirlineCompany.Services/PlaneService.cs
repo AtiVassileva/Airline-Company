@@ -1,9 +1,4 @@
 ﻿using AirlineCompany.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AirlineCompany.Data;
 using AirlineCompany.Models;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +15,12 @@ namespace AirlineCompany.Services
         }
 
         public async Task<IEnumerable<Plane>> GetAllAsync()
-            => await _dbContext.Planes.ToListAsync();
+            => await _dbContext.Planes
+                .OrderBy(p => p.Model)
+                .ThenByDescending(p => p.EconomySeats)
+                .ThenByDescending(p => p.BusinessSeats)
+                .ThenByDescending(p => p.FirstClassSeats)
+                .ToListAsync();
 
         public async Task<Plane?> GetByIdAsync(Guid id)
             => await _dbContext.Planes.FindAsync(id);

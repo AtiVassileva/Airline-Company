@@ -1,12 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<AirlineCompany.Models.Plane>
 
-<div class="d-flex mt-2 mb-2">
-    <h2>Самолети</h2>
-    <a asp-action="Create" class="btn btn-primary" style="margin-left: 20px;">Добави нов самолет</a>
+<div class="m-0 mt-3 mb-2 d-flex justify-content-between">
+    <h3>Самолети</h3>
+    <input type="text" id="searchPlanesInput" class="form-control mb-3" style="margin-left: 20px;" placeholder="Търси по име..." />
+    <a asp-action="Create" class="btn btn-success" style="margin-left: 20px; height: fit-content;">Добави нов самолет</a>
 </div>
 
-<table class="table table-bordered">
+<table class="table table-bordered" id="planesTable">
     <tr>
         <th>Модел</th>
         <th>Общо места</th>

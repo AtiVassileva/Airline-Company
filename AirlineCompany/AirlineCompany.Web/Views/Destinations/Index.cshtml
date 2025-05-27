@@ -1,12 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<AirlineCompany.Models.Destination>
 
-<div class="d-flex mt-2 mb-2">
-    <h2>Дестинации</h2>
-    <a asp-action="Update" class="btn btn-primary" style="margin-left: 20px;">Добави нова дестинация</a>
+<div class="m-0 mt-3 mb-2 d-flex justify-content-between">
+    <h3>Дестинации</h3>
+    <input type="text" id="searchDestinationsInput" class="form-control mb-3" style="margin-left: 20px;" placeholder="Търси по град..." />
+    <select id="countryFilter" class="form-control form-select" style="width: 200px; margin-left: 20px;">
+        <option value="">Всички държави</option>
+        @foreach (var country in Model.Select(d => d.CountryName).Distinct().OrderBy(c => c))
+        {
+            <option value="@country">@country</option>
+        }
+    </select>
+    <a asp-action="Create" class="btn btn-success" style="margin-left: 20px; height: fit-content;">Добави нова дестинация</a>
 </div>
 
-<table class="table table-bordered">
+<table class="table table-bordered" id="destinationsTable">
     <tr>
         <th>Град</th>
         <th>Държава</th>
