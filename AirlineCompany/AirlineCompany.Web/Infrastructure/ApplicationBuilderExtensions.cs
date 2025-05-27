@@ -13,6 +13,7 @@ namespace AirlineCompany.Web.Infrastructure
         public static void RegisterServicesCollection(this WebApplicationBuilder builder)
         {
             builder.Services
+                .AddTransient<IActivityLogService, ActivityLogService>()
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IDestinationService, DestinationService>()
                 .AddTransient<IPlaneService, PlaneService>();

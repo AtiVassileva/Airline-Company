@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AirlineCompany.Models.ActivityLog>
+
+<div class="m-0 mt-3 mb-2 d-flex justify-content-between">
+    <h3>Журнал на действията</h3>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Таблица</th>
+            <th>Действие</th>
+            <th>Време на операцията</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var log in Model)
+        {
+            <tr>
+                <td>@log.TableName</td>
+                <td>@log.Action</td>
+                <td>@log.Timestamp.ToString("dd.MM.yyyy HH:mm")</td>
+            </tr>
+        }
+    </tbody>
+</table>

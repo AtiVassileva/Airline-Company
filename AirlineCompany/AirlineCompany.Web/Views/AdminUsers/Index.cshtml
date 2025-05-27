@@ -22,7 +22,7 @@
             <td>
                 @if (!submodel.IsAdmin)
                 {
-                    <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#roleModal" data-item-name="@($" потребителя {submodel.User.Email}")" data-role-url="@($"/AdminUsers/MakeAdmin/{submodel.User.Id}")" style="color: #fff;">
+                    <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#roleModal" data-item-name="@($" потребителя {submodel.User.Email}")" data-role-url="@($"/AdminUsers/MakeAdmin/{submodel.User.Id}")" style="color: #fff;">
                         Направи админ
                     </a>
                     <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-name="@($" потребителя {submodel.User.Email}")" data-delete-url="@($"/AdminUsers/Delete/{submodel.User.Id}")" style="color: #fff;">

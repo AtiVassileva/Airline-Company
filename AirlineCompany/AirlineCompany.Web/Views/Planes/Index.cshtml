@@ -3,7 +3,7 @@
 
 <div class="m-0 mt-3 mb-2 d-flex justify-content-between">
     <h3>Самолети</h3>
-    <input type="text" id="searchPlanesInput" class="form-control mb-3" style="margin-left: 20px;" placeholder="Търси по име..." />
+    <input type="text" id="searchPlanesInput" class="form-control mb-3" style="margin-left: 20px;" placeholder="Търси по модел..." />
     <a asp-action="Create" class="btn btn-success" style="margin-left: 20px; height: fit-content;">Добави нов самолет</a>
 </div>
 
@@ -26,7 +26,7 @@
             <td>@plane.BusinessSeats</td>
             <td>@plane.FirstClassSeats</td>
             <td>
-                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@plane.Id" style="color: #fff;">Редактирай</a>
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@plane.Id" style="color: #fff;">Редактирай</a>
                 <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-name="@($" самолетът {plane.Model}")" data-delete-url="@($"/Planes/Delete/{plane.Id}")" style="color: #fff;">
                     Изтрий
                 </a>

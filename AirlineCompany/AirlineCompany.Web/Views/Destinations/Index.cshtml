@@ -28,7 +28,7 @@
             <td>@destination.CountryName</td>
             <td>@destination.AirportName</td>
             <td>
-                <a class="btn btn-warning" asp-action="Update" asp-route-id="@destination.Id" style="color: #fff;">Редактирай</a>
+                <a class="btn btn-info" asp-action="Update" asp-route-id="@destination.Id" style="color: #fff;">Редактирай</a>
                 <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-name="@($" дестинацията {destination.CityName} ({destination.AirportName}) - {destination.CountryName}")" data-delete-url="@($"/Destinations/Delete/{destination.Id}")" style="color: #fff;">
                     Изтрий
                 </a>
