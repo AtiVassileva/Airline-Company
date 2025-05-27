@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<AirlineCompany.Models.Plane>
+
+<div class="d-flex mt-2 mb-2">
+    <h2>Самолети</h2>
+    <a asp-action="Create" class="btn btn-primary" style="margin-left: 20px;">Добави нов самолет</a>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Модел</th>
+        <th>Общо места</th>
+        <th>Икономични</th>
+        <th>Бизнес</th>
+        <th>Първа класа</th>
+        <th>Действия</th>
+    </tr>
+
+    @foreach (var plane in Model)
+    {
+        <tr>
+            <td>@plane.Model</td>
+            <td>@plane.TotalSeats</td>
+            <td>@plane.EconomySeats</td>
+            <td>@plane.BusinessSeats</td>
+            <td>@plane.FirstClassSeats</td>
+            <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@plane.Id" style="color: #fff;">Редактирай</a>
+                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-name="@($" самолетът {plane.Model}")" data-delete-url="@($"/Planes/Delete/{plane.Id}")" style="color: #fff;">
+                    Изтрий
+                </a>
+            </td>
+        </tr>
+    }
+</table>

@@ -22,6 +22,9 @@ namespace AirlineCompany.Models
         public Destination DepartureDestination { get; set; } = null!;
         public Destination ArrivalDestination { get; set; } = null!;
 
+        [Required] public Guid SeatAvailabilityId { get; set; }
+        public FlightSeatAvailability SeatAvailability { get; set; } = null!;
+
         public ICollection<Seat> Seats { get; set; } = new HashSet<Seat>();
         public ICollection<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
     }

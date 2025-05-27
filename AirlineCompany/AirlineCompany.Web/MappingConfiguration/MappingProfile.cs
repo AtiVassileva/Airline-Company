@@ -10,6 +10,10 @@ namespace AirlineCompany.Web.MappingConfiguration
         {
             CreateMap<Destination, DestinationFormModel>()
                 .ReverseMap();
+
+            CreateMap<Plane, PlaneFormViewModel>()
+                .ForMember(dest => dest.PlaneModel, cfg => cfg.MapFrom(src => src.Model))
+                .ReverseMap();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace AirlineCompany.Data
         }
 
         public DbSet<Flight> Flights { get; set; } = null!;
+        public DbSet<Plane> Planes { get; set; } = null!;
         public DbSet<Reservation> Reservations { get; set; } = null!;
         public DbSet<Passenger> Passengers { get; set; } = null!;
         public DbSet<Seat> Seats { get; set; } = null!;
@@ -22,6 +23,7 @@ namespace AirlineCompany.Data
         public DbSet<Destination> Destinations { get; set; } = null!;
         public DbSet<Status> Statuses { get; set; } = null!;
         public DbSet<ActivityLog> ActivityLogs { get; set; } = null!;
+        public DbSet<FlightSeatAvailability> FlightSeatAvailabilities { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,6 +79,11 @@ namespace AirlineCompany.Data
                 .HasOne(s => s.Flight)
                 .WithMany(f => f.Seats)
                 .HasForeignKey(s => s.FlightId);
+
+            modelBuilder.Entity<Flight>()
+                .HasOne(f => f.SeatAvailability)
+                .WithOne(s => s.Flight)
+                .HasForeignKey<FlightSeatAvailability>(s => s.FlightId);
 
             modelBuilder.ApplyHasTrigger();
         }

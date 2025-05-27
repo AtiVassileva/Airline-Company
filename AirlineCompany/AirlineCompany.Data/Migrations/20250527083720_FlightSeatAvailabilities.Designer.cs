@@ -4,6 +4,7 @@ using AirlineCompany.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirlineCompany.Web.Data.Migrations
 {
     [DbContext(typeof(AirFlyDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250527083720_FlightSeatAvailabilities")]
+    partial class FlightSeatAvailabilities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,9 +331,9 @@ namespace AirlineCompany.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Planes", "21180083", t =>
+                    b.ToTable("Plane", "21180083", t =>
                         {
-                            t.HasTrigger("fake_trigger_Planes");
+                            t.HasTrigger("fake_trigger_Plane");
                         });
 
                     b.HasAnnotation("SqlServer:UseSqlOutputClause", false);

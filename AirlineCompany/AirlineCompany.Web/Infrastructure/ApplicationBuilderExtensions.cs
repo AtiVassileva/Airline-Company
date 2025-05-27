@@ -14,7 +14,8 @@ namespace AirlineCompany.Web.Infrastructure
         {
             builder.Services
                 .AddTransient<IUserService, UserService>()
-                .AddTransient<IDestinationService, DestinationService>();
+                .AddTransient<IDestinationService, DestinationService>()
+                .AddTransient<IPlaneService, PlaneService>();
         }
 
         public static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)

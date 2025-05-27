@@ -1,0 +1,64 @@
+﻿@model PlaneFormViewModel
+
+<h2>@(Model.Id == null ? "Създай самолет" : "Редактирай самолет")</h2>
+
+<form asp-action="@(Model.Id == null ? "Create" : "Edit")" method="post">
+    @if (Model.Id != null)
+    {
+        <input type="hidden" asp-for="Id" />
+    }
+    
+    @if (Model.VersionNo != null)
+    {
+        <input type="hidden" asp-for="VersionNo" />
+    }
+
+    <div class="form-group">
+        <label asp-for="PlaneModel"></label>
+        <input asp-for="PlaneModel" class="form-control" />
+        <span asp-validation-for="PlaneModel" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="TotalSeats"></label>
+        <input asp-for="TotalSeats" class="form-control" id="TotalSeats" readonly="readonly" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EconomySeats"></label>
+        <input asp-for="EconomySeats" class="form-control seat-input" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BusinessSeats"></label>
+        <input asp-for="BusinessSeats" class="form-control seat-input" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FirstClassSeats"></label>
+        <input asp-for="FirstClassSeats" class="form-control seat-input" />
+    </div>
+
+
+    <a asp-action="Index" class="btn btn-secondary">Отказ</a>
+    <button type="submit" class="btn btn-success">Запази</button>
+</form>
+
+@section Scripts {
+    <script>
+        function updateTotalSeats() {
+            let economy = parseInt(document.getElementById("EconomySeats").value) || 0;
+            let business = parseInt(document.getElementById("BusinessSeats").value) || 0;
+            let firstClass = parseInt(document.getElementById("FirstClassSeats").value) || 0;
+
+            let total = economy + business + firstClass;
+            document.getElementById("TotalSeats").value = total;
+        }
+
+        document.querySelectorAll(".seat-input").forEach(el => {
+            el.addEventListener("input", updateTotalSeats);
+        });
+        
+        updateTotalSeats();
+    </script>
+}
