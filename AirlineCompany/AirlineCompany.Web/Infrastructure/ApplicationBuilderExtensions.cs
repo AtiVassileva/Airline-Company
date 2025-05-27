@@ -16,7 +16,8 @@ namespace AirlineCompany.Web.Infrastructure
                 .AddTransient<IActivityLogService, ActivityLogService>()
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IDestinationService, DestinationService>()
-                .AddTransient<IPlaneService, PlaneService>();
+                .AddTransient<IPlaneService, PlaneService>()
+                .AddTransient<IFlightService, FlightService>();
         }
 
         public static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)

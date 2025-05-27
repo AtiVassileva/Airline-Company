@@ -4,6 +4,7 @@ using AirlineCompany.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirlineCompany.Web.Data.Migrations
 {
     [DbContext(typeof(AirFlyDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250527122359_RemoveRedundantStatus")]
+    partial class RemoveRedundantStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -385,6 +388,46 @@ namespace AirlineCompany.Web.Data.Migrations
                     b.ToTable("Reservations", "21180083", t =>
                         {
                             t.HasTrigger("fake_trigger_Reservations");
+                        });
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                });
+
+            modelBuilder.Entity("AirlineCompany.Models.Seat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("FlightId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("VersionNo")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightId");
+
+                    b.ToTable("Seats", "21180083", t =>
+                        {
+                            t.HasTrigger("fake_trigger_Seats");
                         });
 
                     b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
@@ -775,6 +818,17 @@ namespace AirlineCompany.Web.Data.Migrations
                     b.Navigation("TicketType");
                 });
 
+            modelBuilder.Entity("AirlineCompany.Models.Seat", b =>
+                {
+                    b.HasOne("AirlineCompany.Models.Flight", "Flight")
+                        .WithMany("Seats")
+                        .HasForeignKey("FlightId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Flight");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -839,6 +893,8 @@ namespace AirlineCompany.Web.Data.Migrations
 
                     b.Navigation("SeatAvailability")
                         .IsRequired();
+
+                    b.Navigation("Seats");
                 });
 
             modelBuilder.Entity("AirlineCompany.Models.LuggageType", b =>

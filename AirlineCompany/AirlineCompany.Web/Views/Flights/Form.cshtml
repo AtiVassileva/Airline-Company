@@ -1,0 +1,46 @@
+﻿@model FlightFormViewModel
+
+<form asp-action="@(ViewContext.RouteData.Values["action"]!.ToString())" method="post">
+    <input asp-for="Id" type="hidden" />
+    <input type="hidden" asp-for="VersionNo" />
+
+    <div class="form-group">
+        <label asp-for="FlightNumber"></label>
+        <input asp-for="FlightNumber" class="form-control" />
+        <span asp-validation-for="FlightNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PlaneId"></label>
+        <select asp-for="PlaneId" asp-items="Model.Planes" class="form-control select2"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DepartureDestinationId"></label>
+        <select asp-for="DepartureDestinationId" asp-items="Model.Destinations" class="form-control select2"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ArrivalDestinationId"></label>
+        <select asp-for="ArrivalDestinationId" asp-items="Model.Destinations" class="form-control select2"></select>
+        <span asp-validation-for="ArrivalDestinationId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DepartureTime"></label>
+        <input asp-for="DepartureTime" type="datetime-local" 
+               min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" 
+               class="form-control" />
+        <span asp-validation-for="DepartureTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ArrivalTime"></label>
+        <input asp-for="ArrivalTime" type="datetime-local" 
+               min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" 
+               class="form-control" />
+        <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Запази</button>
+</form>

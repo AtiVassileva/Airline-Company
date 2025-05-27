@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static AirlineCompany.Models.Common.ModelConstants;
 
 namespace AirlineCompany.Models
 {
@@ -8,9 +7,6 @@ namespace AirlineCompany.Models
         public string FlightNumber { get; set; } = null!;
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
-
-        [Required]
-        public FlightStatus FlightStatus { get; set; }
 
         [Required]
         public Guid PlaneId { get; set; }
@@ -24,8 +20,6 @@ namespace AirlineCompany.Models
 
         [Required] public Guid SeatAvailabilityId { get; set; }
         public FlightSeatAvailability SeatAvailability { get; set; } = null!;
-
-        public ICollection<Seat> Seats { get; set; } = new HashSet<Seat>();
         public ICollection<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
     }
 }

@@ -17,7 +17,6 @@ namespace AirlineCompany.Data
         public DbSet<Plane> Planes { get; set; } = null!;
         public DbSet<Reservation> Reservations { get; set; } = null!;
         public DbSet<Passenger> Passengers { get; set; } = null!;
-        public DbSet<Seat> Seats { get; set; } = null!;
         public DbSet<TicketType> TicketTypes { get; set; } = null!;
         public DbSet<LuggageType> LuggageTypes { get; set; } = null!;
         public DbSet<Destination> Destinations { get; set; } = null!;
@@ -74,11 +73,6 @@ namespace AirlineCompany.Data
                 .HasOne(p => p.Reservation)
                 .WithMany(r => r.Passengers)
                 .HasForeignKey(p => p.ReservationId);
-
-            modelBuilder.Entity<Seat>()
-                .HasOne(s => s.Flight)
-                .WithMany(f => f.Seats)
-                .HasForeignKey(s => s.FlightId);
 
             modelBuilder.Entity<Flight>()
                 .HasOne(f => f.SeatAvailability)

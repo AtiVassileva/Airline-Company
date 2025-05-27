@@ -114,6 +114,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchFlightsInput");
+
+    if (searchInput) {
+        searchInput.addEventListener("keyup", function () {
+            const query = this.value.toLowerCase();
+            const rows = document.querySelectorAll("#flightsTable tbody tr");
+
+            rows.forEach(row => {
+                const email = row.cells[0].innerText.toLowerCase();
+                row.style.display = email.includes(query) ? "" : "none";
+            });
+        });
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
     const countryFilter = document.getElementById("countryFilter");
     const table = document.getElementById("destinationsTable");
     const rows = table.getElementsByTagName("tr");
@@ -130,5 +146,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             rows[i].style.display = match ? "" : "none";
         }
+    });
+});
+
+$(document).ready(function () {
+    $('.select2').select2({
+        placeholder: "Изберете опция",
+        allowClear: true,
+        width: '100%'
     });
 });

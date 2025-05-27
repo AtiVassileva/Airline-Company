@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<FlightViewModel>
+
+<div class="m-0 mt-3 mb-2 d-flex justify-content-between">
+    <h3>Полети</h3>
+    <input type="text" id="searchFlightsInput" class="form-control mb-3" style="margin-left: 20px;" placeholder="Търси по номер..." />
+    <a asp-action="Create" class="btn btn-success" style="margin-left: 20px; height: fit-content;">Добави нов полет</a>
+</div>
+
+<table class="table table-bordered" id="flightsTable">
+    <tr>
+        <th>Номер</th>
+        <th>Самолет</th>
+        <th>Начална дестинация</th>
+        <th>Крайна дестинация</th>
+        <th>Време на излитане</th>
+        <th>Време на кацане</th>
+        <th>Действия</th>
+    </tr>
+    @foreach (var flight in Model)
+    {
+        <tr>
+            <td>@flight.FlightNumber</td>
+            <td>@flight.PlaneModel</td>
+            <td>@flight.DepartureCity</td>
+            <td>@flight.ArrivalCity</td>
+            <td>@flight.DepartureTime.ToString("dd.MM.yyyy HH:mm")</td>
+            <td>@flight.ArrivalTime.ToString("dd.MM.yyyy HH:mm")</td>
+            <td>
+                <a class="btn btn-info" asp-action="Edit" asp-route-id="@flight.Id" style="color: #fff;">Редактирай</a>
+                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-name="@($" полета {flight.FlightNumber}")" data-delete-url="@($"/Flights/Delete/{flight.Id}")" style="color: #fff;">
+                    Изтрий
+                </a>
+            </td>
+        </tr>
+    }
+</table>
