@@ -43,6 +43,15 @@ namespace AirlineCompany.Web.MappingConfiguration
                 .ForMember(dest => dest.TicketType, opt => opt.MapFrom(src => src.TicketType.Name))
                 .ForMember(dest => dest.LuggageType, opt => opt.MapFrom(src => src.LuggageType.Name))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.Name));
+
+            CreateMap<Flight, FlightReportViewModel>()
+                .ForMember(dest => dest.FlightNumber, opt => opt.MapFrom(src => src.FlightNumber))
+                .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.DepartureDestination.CityName))
+                .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.ArrivalDestination.CityName))
+                .ForMember(dest => dest.Departure, opt => opt.MapFrom(src => src.DepartureTime))
+                .ForMember(dest => dest.Arrival, opt => opt.MapFrom(src => src.ArrivalTime))
+                .ForMember(dest => dest.ActiveReservationsCount, opt => opt.MapFrom(src => src.Reservations.Count(r => !r.IsCancelled)))
+                .ForMember(dest => dest.CancelledReservationsCount, opt => opt.MapFrom(src => src.Reservations.Count(r => r.IsCancelled)));
         }
     }
 }

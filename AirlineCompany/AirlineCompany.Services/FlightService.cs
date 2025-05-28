@@ -30,6 +30,14 @@ namespace AirlineCompany.Services
                 .Include(f => f.SeatAvailability)
                 .FirstOrDefaultAsync(f => f.Id == id);
 
+        public async Task<List<Flight>> GetFlightsInDateRangeWithReservationsAsync(DateTime start, DateTime end)
+        => await _context.Flights
+            .Include(f => f.Reservations)
+            .Include(f => f.DepartureDestination)
+            .Include(f => f.ArrivalDestination)
+            .Where(f => f.DepartureTime >= start && f.DepartureTime <= end)
+            .ToListAsync();
+
         public async Task<IEnumerable<Flight>> SearchFlightsAsync(Guid departureId, Guid arrivalId) 
             => await _context.Flights
                 .Include(f => f.DepartureDestination)

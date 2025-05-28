@@ -1,0 +1,64 @@
+﻿@model ReportFilterModel
+
+<h2>Справка за полети</h2>
+
+<form asp-action="Generate" method="post">
+    <div class="row">
+        <div class="col-md-3">
+            <label>От дата:</label>
+            <input asp-for="From" type="date" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label>До дата:</label>
+            <input asp-for="To" type="date" class="form-control" />
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-info text-white">Генерирай</button>
+        </div>
+    </div>
+</form>
+
+@if (Model.Results.Any())
+{
+    <hr />
+    <form asp-action="ExportCsv" method="post" class="d-inline">
+        <input type="hidden" name="From" value="@Model.From.ToString("yyyy-MM-dd")" />
+        <input type="hidden" name="To" value="@Model.To.ToString("yyyy-MM-dd")" />
+        <button type="submit" class="btn btn-secondary">Изтегли като CSV</button>
+    </form>
+    <form asp-action="ExportExcel" method="post" class="d-inline">
+        <input type="hidden" name="From" value="@Model.From.ToString("yyyy-MM-dd")" />
+        <input type="hidden" name="To" value="@Model.To.ToString("yyyy-MM-dd")" />
+        <button type="submit" class="btn btn-success">Изтегли като Excel</button>
+    </form>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>Номер на полет</th>
+                <th>От</th>
+                <th>До</th>
+                <th>Излитане</th>
+                <th>Кацане</th>
+                <th>Активни резервации</th>
+                <th>Отменени резервации</th>
+                <th>Общо резервации</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var flight in Model.Results)
+            {
+                <tr>
+                    <td>@flight.FlightNumber</td>
+                    <td>@flight.From</td>
+                    <td>@flight.To</td>
+                    <td>@flight.Departure.ToString("g")</td>
+                    <td>@flight.Arrival.ToString("g")</td>
+                    <td>@flight.ActiveReservationsCount</td>
+                    <td>@flight.CancelledReservationsCount</td>
+                    <td>@(flight.ActiveReservationsCount + flight.CancelledReservationsCount)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

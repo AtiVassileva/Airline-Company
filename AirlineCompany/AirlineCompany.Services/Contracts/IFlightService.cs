@@ -6,6 +6,7 @@ namespace AirlineCompany.Services.Contracts
     {
         Task<IEnumerable<Flight>> GetAllAsync();
         Task<Flight?> GetByIdAsync(Guid id);
+        Task<List<Flight>> GetFlightsInDateRangeWithReservationsAsync(DateTime start, DateTime end);
         Task<IEnumerable<Flight>> SearchFlightsAsync(Guid departureId, Guid arrivalId);
         Task CreateAsync(Flight flight);
         Task UpdateAsync(Flight flight);
