@@ -17,7 +17,11 @@ namespace AirlineCompany.Web.Infrastructure
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IDestinationService, DestinationService>()
                 .AddTransient<IPlaneService, PlaneService>()
-                .AddTransient<IFlightService, FlightService>();
+                .AddTransient<IFlightService, FlightService>()
+                .AddTransient<ITicketTypeService, TicketTypeService>()
+                .AddTransient<ILuggageTypeService, LuggageTypeService>()
+                .AddTransient<IStatusService, StatusService>()
+                .AddTransient<IReservationService, ReservationService>();
         }
 
         public static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)
@@ -70,7 +74,6 @@ namespace AirlineCompany.Web.Infrastructure
 
             var statuses = new List<Status>
             {
-                new() {Name = "Активна"},
                 new() {Name = "Предстояща"},
                 new() {Name = "Канселирана"},
                 new() {Name = "Приключена"}

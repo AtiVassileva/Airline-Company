@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AirlineCompany.Web.Models
 {
-    public class FlightFormViewModel
+    public class FlightFormModel
     {
         public Guid? Id { get; set; }
 

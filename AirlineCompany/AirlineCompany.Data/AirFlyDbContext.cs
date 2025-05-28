@@ -69,10 +69,10 @@ namespace AirlineCompany.Data
                 .WithMany(b => b.Reservations)
                 .HasForeignKey(r => r.LuggageId);
 
-            modelBuilder.Entity<Passenger>()
-                .HasOne(p => p.Reservation)
-                .WithMany(r => r.Passengers)
-                .HasForeignKey(p => p.ReservationId);
+            modelBuilder.Entity<Reservation>()
+                .HasOne(r => r.Passenger)
+                .WithOne(p => p.Reservation)
+                .HasForeignKey<Passenger>(p => p.ReservationId);
 
             modelBuilder.Entity<Flight>()
                 .HasOne(f => f.SeatAvailability)

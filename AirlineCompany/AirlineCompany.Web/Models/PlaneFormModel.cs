@@ -2,7 +2,7 @@
 
 namespace AirlineCompany.Web.Models
 {
-    public class PlaneFormViewModel
+    public class PlaneFormModel
     {
         public Guid? Id { get; set; }
 

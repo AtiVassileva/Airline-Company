@@ -3,11 +3,10 @@
     public class Passenger : BaseEntity
     {
         public string FirstName { get; set; } = null!;
-        public string? MiddleName { get; set; } = null!;
+        public string? MiddleName { get; set; } 
         public string LastName { get; set; } = null!;
         public DateTime DateOfBirth { get; set; }
-
-        public string PassportNumber { get; set; } = null!;
+        
         public string PersonalIdNumber { get; set; } = null!;
         public string Nationality { get; set; } = null!;
 

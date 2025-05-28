@@ -1,0 +1,53 @@
+﻿@model SearchFlightViewModel
+
+<h2>Търси полет</h2>
+
+<form asp-action="Search" method="post" class="mb-3">
+    <div class="form-group">
+        <label asp-for="DepartureDestinationId"></label>
+        <select asp-for="DepartureDestinationId" asp-items="@Model.Destinations" class="form-control select2"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ArrivalDestinationId"></label>
+        <select asp-for="ArrivalDestinationId" asp-items="@Model.Destinations" class="form-control select2"></select>
+    </div>
+
+    <button type="submit" class="btn btn-info">Търси</button>
+</form>
+
+@if (Model.Flights.Any())
+{
+    <h3>Намерени полети</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Номер</th>
+            <th>От</th>
+            <th>До</th>
+            <th>Излитане</th>
+            <th>Кацане</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var flight in Model.Flights)
+        {
+            <tr>
+                <td>@flight.FlightNumber</td>
+                <td>@flight.DepartureCity</td>
+                <td>@flight.ArrivalCity</td>
+                <td>@flight.DepartureTime.ToString("g")</td>
+                <td>@flight.ArrivalTime.ToString("g")</td>
+                <td>
+                    <a asp-action="Create" asp-route-flightId="@flight.Id" class="btn btn-success">Резервирай</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Няма намерени полети.</p>
+}

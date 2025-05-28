@@ -30,10 +30,10 @@ namespace AirlineCompany.Web.Controllers
         }
 
         public async Task<IActionResult> Create()
-            => await LoadForm(new FlightFormViewModel {DepartureTime = DateTime.Now, ArrivalTime = DateTime.Now});
+            => await LoadForm(new FlightFormModel {DepartureTime = DateTime.Now, ArrivalTime = DateTime.Now});
 
         [HttpPost]
-        public async Task<IActionResult> Create(FlightFormViewModel model)
+        public async Task<IActionResult> Create(FlightFormModel model)
         {
             if (!ModelState.IsValid)
                 return await LoadForm(model);
@@ -58,12 +58,12 @@ namespace AirlineCompany.Web.Controllers
             var flight = await _flightService.GetByIdAsync(id);
             if (flight == null) return NotFound();
 
-            var model = _mapper.Map<FlightFormViewModel>(flight);
+            var model = _mapper.Map<FlightFormModel>(flight);
             return await LoadForm(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Guid id, FlightFormViewModel model)
+        public async Task<IActionResult> Edit(Guid id, FlightFormModel model)
         {
             if (!ModelState.IsValid)
                 return await LoadForm(model);
@@ -83,7 +83,7 @@ namespace AirlineCompany.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task<IActionResult> LoadForm(FlightFormViewModel model)
+        private async Task<IActionResult> LoadForm(FlightFormModel model)
         {
             model.Planes = (await _planeService.GetAllAsync())
                 .Select(p => new SelectListItem { Text = p.Model, Value = p.Id.ToString() }).ToList();

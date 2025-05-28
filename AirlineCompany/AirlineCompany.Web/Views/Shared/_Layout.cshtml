@@ -38,8 +38,9 @@
                 <ul class="navbar-nav ml-auto">
                     @if (User.Identity!.IsAuthenticated)
                     {
-                        <li class="nav-item"><a class="nav-link" href="city-guides.html">Резервирай полет</a></li>
-                        <li class="nav-item"><a class="nav-link" href="services.html">Моите резервации</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Reservations" asp-action="Search">Резервирай полет</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Reservations" asp-action="Mine">Моите резервации</a></li>
+
                         @if (User.IsAdmin())
                         {
                             <li class="nav-item dropdown">

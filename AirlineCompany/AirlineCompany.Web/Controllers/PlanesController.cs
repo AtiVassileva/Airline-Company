@@ -28,11 +28,11 @@ namespace AirlineCompany.Web.Controllers
 
         public IActionResult Create()
         {
-            return View("Form", new PlaneFormViewModel());
+            return View("Form", new PlaneFormModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(PlaneFormViewModel model)
+        public async Task<IActionResult> Create(PlaneFormModel model)
         {
             if (!ModelState.IsValid) return View("Form", model);
 
@@ -46,12 +46,12 @@ namespace AirlineCompany.Web.Controllers
             var plane = await _planeService.GetByIdAsync(id);
             if (plane == null) return NotFound();
 
-            var viewModel = _mapper.Map<PlaneFormViewModel>(plane);
+            var viewModel = _mapper.Map<PlaneFormModel>(plane);
             return View("Form", viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Guid id, PlaneFormViewModel model)
+        public async Task<IActionResult> Edit(Guid id, PlaneFormModel model)
         {
             if (!ModelState.IsValid) return View("Form", model);
 
