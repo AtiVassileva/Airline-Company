@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AirlineCompany.Web.Attributes;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AirlineCompany.Web.Models
@@ -34,6 +35,10 @@ namespace AirlineCompany.Web.Models
 
         [Display(Name = "Вид багаж*")]
         public Guid LuggageId { get; set; }
+
+        [MustBeTrue(ErrorMessage = "Моля, съгласете се с условията за използване на личните данни!")]
+        [Display(Name = "Съгласен съм личните ми данни да бъдат обработвани за целите на резервацията.")]
+        public bool IsConsentGiven { get; set; }
 
         public List<SelectListItem> TicketTypes { get; set; } = new();
         public List<SelectListItem> LuggageTypes { get; set; } = new();

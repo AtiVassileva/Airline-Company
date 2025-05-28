@@ -26,12 +26,20 @@
             <td>@flight.ArrivalCity</td>
             <td>@flight.DepartureTime.ToString("dd.MM.yyyy HH:mm")</td>
             <td>@flight.ArrivalTime.ToString("dd.MM.yyyy HH:mm")</td>
-            <td>
-                <a class="btn btn-info" asp-action="Edit" asp-route-id="@flight.Id" style="color: #fff;">Редактирай</a>
-                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-name="@($" полета {flight.FlightNumber}")" data-delete-url="@($"/Flights/Delete/{flight.Id}")" style="color: #fff;">
-                    Изтрий
-                </a>
-            </td>
+
+            @if (flight.DepartureTime > DateTime.Now)
+            {
+                <td>
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@flight.Id" style="color: #fff;">Редактирай</a>
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-name="@($" полета {flight.FlightNumber}")" data-delete-url="@($"/Flights/Delete/{flight.Id}")" style="color: #fff;">
+                        Изтрий
+                    </a>
+                </td>
+            }
+            else
+            {
+                <td>Полетът е кацнал. Не са разрешени промени.</td>
+            }
         </tr>
     }
 </table>

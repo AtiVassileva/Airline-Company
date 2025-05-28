@@ -40,9 +40,11 @@
             <td>
                 @if (!res.IsCancelled && res.Status.ToLower() == "предстояща")
                 {
-                    <form asp-action="Cancel" asp-route-id="@res.Id" method="post">
-                        <button type="submit" class="btn btn-sm btn-danger">Канселирай</button>
-                    </form>
+                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelModal" 
+                       data-item-name="@($"{@res.From} до {@res.To}")" data-cancel-url="@($"/Reservations/Cancel/{res.Id}")" 
+                       style="color: #fff;">
+                        Канселирай
+                    </a>
                 }
             </td>
         </tr>

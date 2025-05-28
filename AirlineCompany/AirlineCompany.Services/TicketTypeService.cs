@@ -21,5 +21,23 @@ namespace AirlineCompany.Services
         public async Task<TicketType?> GetByIdAsync(Guid id)
             => await _dbContext.TicketTypes
                 .FirstOrDefaultAsync(t => t.Id == id);
+
+        public async Task<Guid> GetRegularTicketId()
+        {
+            var regularTicket = await _dbContext.TicketTypes.FirstAsync(s => s.Name.ToLower() == "редовен");
+            return regularTicket.Id;
+        }
+
+        public async Task<Guid> GetBusinessTicketId()
+        {
+            var businessTicket = await _dbContext.TicketTypes.FirstAsync(s => s.Name.ToLower() == "бизнес класа");
+            return businessTicket.Id;
+        }
+
+        public async Task<Guid> GetFirstClassTicketId()
+        {
+            var firstClassTicket = await _dbContext.TicketTypes.FirstAsync(s => s.Name.ToLower() == "първа класа");
+            return firstClassTicket.Id;
+        }
     }
 }

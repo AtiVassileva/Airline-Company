@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ReservationListViewModel>
+
+<div class="m-0 mt-3 mb-2 d-flex justify-content-between">
+    <h3>Резервации</h3>
+    <input type="text" id="searchReservationsInput" class="form-control mb-3" style="margin-left: 20px;" placeholder="Търси по потребител..." />
+</div>
+
+<table class="table table-striped" id="reservationsTable">
+    <thead>
+        <tr>
+            <th>Пътник</th>
+            <th>Полет</th>
+            <th>От</th>
+            <th>До</th>
+            <th>Дата</th>
+            <th>Билет</th>
+            <th>Багаж</th>
+            <th>Статус</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var res in Model)
+        {
+            <tr>
+                <td>@res.PassengerFullName</td>
+                <td>@res.FlightNumber</td>
+                <td>@res.From</td>
+                <td>@res.To</td>
+                <td>@res.DepartureTime.ToString("g")</td>
+                <td>@res.TicketType</td>
+                <td>@res.LuggageType</td>
+                <td>
+                    @if (res.IsCancelled)
+                    {
+                        <span class="text-danger">Канселирана</span>
+                    }
+                    else
+                    {
+                        @res.Status
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

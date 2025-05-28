@@ -11,9 +11,10 @@
     <div class="form-group">
         <label asp-for="ArrivalDestinationId"></label>
         <select asp-for="ArrivalDestinationId" asp-items="@Model.Destinations" class="form-control select2"></select>
+        <span asp-validation-for="ArrivalDestinationId" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-info">Търси</button>
+    <button type="submit" class="btn btn-info text-white">Търси</button>
 </form>
 
 @if (Model.Flights.Any())

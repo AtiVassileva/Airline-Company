@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="~/css/select2.css">
     <link rel="stylesheet" href="~/css/helpers.css">
     <link rel="stylesheet" href="~/css/style.css">
+    
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
 
 </head>
 <body>
@@ -67,6 +69,16 @@
                                     <li class="nav-item">
                                         <a class="dropdown-item" asp-controller="Flights" asp-action="Index">
                                             Полети
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-controller="AdminReservations" asp-action="Index">
+                                            Резервации
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-controller="Flights" asp-action="Index">
+                                            Справки
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -144,7 +156,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
                 </div>
                 <div class="modal-body">
-                    Наистина ли искате да канселирате вашата резервация за <strong id="cancelItemName">този елемент</strong>?
+                    Наистина ли искате да канселирате вашата резервация от <strong id="cancelItemName">този елемент</strong>?
                     <strong>След потвърждение, това действие не може да бъде отменено!</strong>
                 </div>
                 <div class="modal-footer">

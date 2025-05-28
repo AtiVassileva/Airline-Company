@@ -1,6 +1,11 @@
 ﻿@model ReservationFormModel
 
-<h2>Резервация</h2>
+<h2>Нова резервация</h2>
+
+@if (TempData["Error"] is not null)
+{
+    <span class="text-danger">@TempData["Error"]</span>
+}
 
 <form asp-action="Create" method="post">
     <input type="hidden" asp-for="FlightId" />
@@ -47,6 +52,13 @@
     <div class="form-group">
         <label asp-for="LuggageId"></label>
         <select asp-for="LuggageId" asp-items="Model.LuggageTypes" class="form-control"></select>
+    </div>
+    
+    <div class="form-check mt-3">
+        <input asp-for="IsConsentGiven" class="form-check-input" type="checkbox" />
+        <label asp-for="IsConsentGiven"></label>
+        <br/>
+        <span asp-validation-for="IsConsentGiven" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Потвърди резервация</button>

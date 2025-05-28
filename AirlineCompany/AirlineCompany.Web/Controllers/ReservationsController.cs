@@ -83,9 +83,18 @@ namespace AirlineCompany.Web.Controllers
             var reservation = _mapper.Map<Reservation>(model);
             reservation.UserId = User.GetId()!;
             reservation.StatusId = await GetDefaultStatusIdAsync();
-            var ticket = await _ticketTypeService.GetByIdAsync(model.TicketId);
 
-            await _reservationService.CreateReservationAsync(reservation, ticket?.Name ?? string.Empty);
+            var isReserved = await _reservationService.CreateReservationAsync(reservation);
+
+            if (!isReserved)
+            {
+                TempData["Error"] = "Няма налични места за избраният от вас тип билет!";
+
+                model.TicketTypes = await GetTicketTypesAsync();
+                model.LuggageTypes = await GetLuggageTypesAsync();
+                return View(model);
+            }
+
             return RedirectToAction(nameof(Mine));
         }
 

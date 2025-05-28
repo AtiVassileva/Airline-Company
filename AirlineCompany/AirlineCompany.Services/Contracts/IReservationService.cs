@@ -4,8 +4,9 @@ namespace AirlineCompany.Services.Contracts
 {
     public interface IReservationService
     {
-        Task<bool> CreateReservationAsync(Reservation reservation, string ticketName);
+        Task<IEnumerable<Reservation>> GetAllAsync();
         Task<IEnumerable<Reservation>> GetUserReservationsAsync(string userId);
+        Task<bool> CreateReservationAsync(Reservation reservation);
         Task<bool> CancelReservationAsync(Guid reservationId);
     }
 }
