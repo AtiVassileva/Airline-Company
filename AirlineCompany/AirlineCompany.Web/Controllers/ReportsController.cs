@@ -1,10 +1,13 @@
 ﻿using AirlineCompany.Services.Contracts;
 using AirlineCompany.Web.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static AirlineCompany.Web.Common.CommonConstants;
 
 namespace AirlineCompany.Web.Controllers
 {
+    [Authorize(Roles = AdministratorRoleName)]
     public class ReportsController : Controller
     {
         private readonly IReportService _reportService;

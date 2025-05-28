@@ -23,6 +23,7 @@ namespace AirlineCompany.Web.Infrastructure
                 .AddTransient<IStatusService, StatusService>()
                 .AddTransient<IReservationService, ReservationService>()
                 .AddTransient<IReportService, ReportService>()
+                .AddTransient<IBoardingPassService, BoardingPassService>()
                 .AddHostedService<ReservationStatusUpdaterService>();
         }
 

@@ -40,7 +40,10 @@
             <td>
                 @if (!res.IsCancelled && res.Status.ToLower() == "предстояща")
                 {
-                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelModal" 
+                    <a asp-action="DownloadBoardingPass" asp-route-id="@res.Id" class="btn btn-primary">
+                        Изтегли бордна карта
+                    </a>
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal" 
                        data-item-name="@($"{@res.From} до {@res.To}")" data-cancel-url="@($"/Reservations/Cancel/{res.Id}")" 
                        style="color: #fff;">
                         Канселирай

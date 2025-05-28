@@ -18,9 +18,10 @@ namespace AirlineCompany.Web.Controllers
         private readonly ITicketTypeService _ticketTypeService;
         private readonly ILuggageTypeService _luggageTypeService;
         private readonly IStatusService _statusService;
+        private readonly IBoardingPassService _boardingPassService;
         private readonly IMapper _mapper;
 
-        public ReservationsController(IReservationService reservationService, IMapper mapper, IFlightService flightService, ITicketTypeService ticketTypeService, ILuggageTypeService luggageTypeService, IStatusService statusService, IDestinationService destinationService)
+        public ReservationsController(IReservationService reservationService, IMapper mapper, IFlightService flightService, ITicketTypeService ticketTypeService, ILuggageTypeService luggageTypeService, IStatusService statusService, IDestinationService destinationService, IBoardingPassService boardingPassService)
         {
             _reservationService = reservationService;
             _mapper = mapper;
@@ -29,6 +30,7 @@ namespace AirlineCompany.Web.Controllers
             _luggageTypeService = luggageTypeService;
             _statusService = statusService;
             _destinationService = destinationService;
+            _boardingPassService = boardingPassService;
         }
 
         public async Task<IActionResult> Search()
@@ -105,6 +107,19 @@ namespace AirlineCompany.Web.Controllers
             var reservationsModels = _mapper.Map<List<ReservationListViewModel>>(reservations);
 
             return View(reservationsModels);
+        }
+
+        public async Task<IActionResult> DownloadBoardingPass(Guid id)
+        {
+            var reservation = await _reservationService.GetWithAllDetailsAsync(id);
+
+            if (reservation == null || reservation.UserId != User.GetId())
+            {
+                return NotFound();
+            }
+
+            var pdfBytes = _boardingPassService.GeneratePdf(reservation);
+            return File(pdfBytes, "application/pdf", $"boarding-pass-{reservation.Flight.FlightNumber}.pdf");
         }
 
         public async Task<IActionResult> Cancel(Guid id)

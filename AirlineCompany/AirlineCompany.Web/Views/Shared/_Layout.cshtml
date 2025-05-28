@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="~/css/select2.css">
     <link rel="stylesheet" href="~/css/helpers.css">
     <link rel="stylesheet" href="~/css/style.css">
-    
+
     <link rel="icon" type="image/x-icon" href="~/favicon.ico">
 
 </head>
@@ -89,9 +89,11 @@
                                 </ul>
                             </li>
                         }
-                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <button type="submit" class="nav-link btn btn-link text-danger">Изход</button>
-                        </form>
+                        <li class="nav-item">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-danger">Изход</button>
+                            </form>
+                        </li>
                     }
                     else
                     {

@@ -1,11 +1,13 @@
 ﻿using AirlineCompany.Services.Contracts;
-using AirlineCompany.Web.Infrastructure;
 using AirlineCompany.Web.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static AirlineCompany.Web.Common.CommonConstants;
 
 namespace AirlineCompany.Web.Controllers
 {
+    [Authorize(Roles = AdministratorRoleName)]
     public class AdminReservationsController : Controller
     {
         private readonly IReservationService _reservationService;

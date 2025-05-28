@@ -2,8 +2,10 @@
 using AirlineCompany.Services.Contracts;
 using AirlineCompany.Web.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static AirlineCompany.Web.Common.CommonConstants;
 
 namespace AirlineCompany.Web.Controllers
 {
@@ -29,10 +31,12 @@ namespace AirlineCompany.Web.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = AdministratorRoleName)]
         public async Task<IActionResult> Create()
             => await LoadForm(new FlightFormModel {DepartureTime = DateTime.Now, ArrivalTime = DateTime.Now});
 
         [HttpPost]
+        [Authorize(Roles = AdministratorRoleName)]
         public async Task<IActionResult> Create(FlightFormModel model)
         {
             if (!ModelState.IsValid)
@@ -53,6 +57,7 @@ namespace AirlineCompany.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = AdministratorRoleName)]
         public async Task<IActionResult> Edit(Guid id)
         {
             var flight = await _flightService.GetByIdAsync(id);
@@ -63,6 +68,7 @@ namespace AirlineCompany.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = AdministratorRoleName)]
         public async Task<IActionResult> Edit(Guid id, FlightFormModel model)
         {
             if (!ModelState.IsValid)
@@ -77,6 +83,7 @@ namespace AirlineCompany.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = AdministratorRoleName)]
         public async Task<IActionResult> Delete(Guid id)
         {
             await _flightService.DeleteAsync(id);

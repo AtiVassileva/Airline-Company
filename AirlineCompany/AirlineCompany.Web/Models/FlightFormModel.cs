@@ -32,7 +32,7 @@ namespace AirlineCompany.Web.Models
         [Required(ErrorMessage = "Моля, изберете време на кацане!")]
         [Display(Name = "Време на кацане")]
         [ArrivalAfterDeparture("DepartureTime")]
-        public DateTime ArrivalTime { get; set; }
+        public DateTime ArrivalTime { get; set; } 
 
         public byte[]? VersionNo { get; set; }
 

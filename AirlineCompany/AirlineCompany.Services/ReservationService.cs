@@ -56,6 +56,18 @@ namespace AirlineCompany.Services
             return finishedReservations;
         }
 
+        public async Task<Reservation?> GetWithAllDetailsAsync(Guid id) 
+            => await _dbContext.Reservations
+                .Include(r => r.Passenger)
+                .Include(r => r.Flight)
+                .ThenInclude(f => f.DepartureDestination)
+                .Include(r => r.Flight)
+                .ThenInclude(f => f.ArrivalDestination)
+                .Include(r => r.TicketType)
+                .Include(r => r.LuggageType)
+                .Include(r => r.Status)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
         public async Task<bool> CreateReservationAsync(Reservation reservation)
         {
             var availability = await _dbContext.FlightSeatAvailabilities
