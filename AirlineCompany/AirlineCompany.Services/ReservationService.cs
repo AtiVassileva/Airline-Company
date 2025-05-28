@@ -45,6 +45,17 @@ namespace AirlineCompany.Services
                 .OrderByDescending(r => r.Flight.DepartureTime)
                 .ToListAsync();
 
+        public async Task<IEnumerable<Reservation>> GetFinishedReservationsAsync()
+        {
+            var reservations = await GetAllAsync();
+
+            var finishedReservations = reservations
+                .Where(r => r.Flight.DepartureTime <= DateTime.Now && !r.IsCancelled)
+                .ToList();
+
+            return finishedReservations;
+        }
+
         public async Task<bool> CreateReservationAsync(Reservation reservation)
         {
             var availability = await _dbContext.FlightSeatAvailabilities

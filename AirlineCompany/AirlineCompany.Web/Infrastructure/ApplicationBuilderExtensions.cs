@@ -22,7 +22,8 @@ namespace AirlineCompany.Web.Infrastructure
                 .AddTransient<ILuggageTypeService, LuggageTypeService>()
                 .AddTransient<IStatusService, StatusService>()
                 .AddTransient<IReservationService, ReservationService>()
-                .AddTransient<IReportService, ReportService>();
+                .AddTransient<IReportService, ReportService>()
+                .AddHostedService<ReservationStatusUpdaterService>();
         }
 
         public static async Task<IApplicationBuilder> PrepareDatabase(this IApplicationBuilder app)
